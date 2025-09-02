@@ -1,3 +1,5 @@
+using SpendingControlConsoleApp.Validators;
+
 namespace SpendingControlConsoleApp.Entities
 {
     public class CreditCard
@@ -16,12 +18,7 @@ namespace SpendingControlConsoleApp.Entities
         public CreditCard(int id, int userId, string name, DateTime expirationDate, string brand,
             double limit, DateTime dueDate, DateTime registrationDate)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Name cannot be null or empty.", nameof(name));
-            if (name.Length < CreditCardConstants.MinNameLength || name.Length > CreditCardConstants.MaxNameLength)
-                throw new ArgumentException(
-                    $"Name must be between {CreditCardConstants.MinNameLength} and {CreditCardConstants.MaxNameLength} characters.",
-                    nameof(name));
+            EntityValidator.ValidateName(name);
 
             if (string.IsNullOrWhiteSpace(brand))
                 throw new ArgumentException("Brand cannot be null or empty.", nameof(brand));
@@ -29,7 +26,6 @@ namespace SpendingControlConsoleApp.Entities
                 throw new ArgumentException(
                     $"Brand must be between {CreditCardConstants.MinBrandLength} and {CreditCardConstants.MaxBrandLength} characters.",
                     nameof(brand));
-
 
             Id = id;
             UserId = userId;
@@ -43,12 +39,7 @@ namespace SpendingControlConsoleApp.Entities
         public void UpdateCreditCard(string name, DateTime expirationDate, string brand,
             double limit, DateTime dueDate)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Name cannot be null or empty.", nameof(name));
-            if (name.Length < CreditCardConstants.MinNameLength || name.Length > CreditCardConstants.MaxNameLength)
-                throw new ArgumentException(
-                    $"Name must be between {CreditCardConstants.MinNameLength} and {CreditCardConstants.MaxNameLength} characters.",
-                    nameof(name));
+            EntityValidator.ValidateName(name);
 
             if (string.IsNullOrWhiteSpace(brand))
                 throw new ArgumentException("Brand cannot be null or empty.", nameof(brand));
@@ -67,8 +58,6 @@ namespace SpendingControlConsoleApp.Entities
 
     public static class CreditCardConstants
     {
-        public const int MinNameLength = 2;
-        public const int MaxNameLength = 100;
         public const int MinBrandLength = 2;
         public const int MaxBrandLength = 50;
     }

@@ -1,3 +1,4 @@
+using SpendingControlConsoleApp.Validators;
 namespace SpendingControlConsoleApp.Entities
 {
     public class FinancialGoal
@@ -16,20 +17,9 @@ namespace SpendingControlConsoleApp.Entities
         public FinancialGoal(int id, int userId, string name, double goalAmount, double currentAmount,
             DateTime deadline, string description, DateTime registrationDate)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Name cannot be null or empty.", nameof(name));
-            if (name.Length < FinancialGoalConstants.MinNameLength || name.Length > FinancialGoalConstants.MaxNameLength)
-                throw new ArgumentException(
-                    $"Name must be between {FinancialGoalConstants.MinNameLength} and {FinancialGoalConstants.MaxNameLength} characters.",
-                    nameof(name));
+            EntityValidator.ValidateName(name);
+            EntityValidator.ValidateDescription(description);
 
-            if (string.IsNullOrWhiteSpace(description))
-                throw new ArgumentException("Description cannot be null or empty.", nameof(description));
-            if (description.Length < FinancialGoalConstants.MinDescriptionLength || description.Length > FinancialGoalConstants.MaxDescriptionLength)
-                throw new ArgumentException(
-                    $"Description must be between {FinancialGoalConstants.MinDescriptionLength} and {FinancialGoalConstants.MaxDescriptionLength} characters.",
-                    nameof(description));
-                    
             Id = id;
             UserId = userId;
             Name = name;
@@ -48,13 +38,5 @@ namespace SpendingControlConsoleApp.Entities
             Deadline = deadline;
             Description = description;
         }
-    }
-
-    public static class FinancialGoalConstants
-    {
-        public const int MinNameLength = 2;
-        public const int MaxNameLength = 100;
-        public const int MinDescriptionLength = 5;
-        public const int MaxDescriptionLength = 500;
-    }
+    }    
 }

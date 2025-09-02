@@ -1,3 +1,4 @@
+using SpendingControlConsoleApp.Validators;
 namespace SpendingControlConsoleApp.Entities
 {
     public class Category
@@ -12,19 +13,8 @@ namespace SpendingControlConsoleApp.Entities
 
         public Category(int id, string name, string description, string type, DateTime registrationDate)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Name cannot be null or empty.", nameof(name));
-            if (name.Length < CategoryConstants.MinNameLength || name.Length > CategoryConstants.MaxNameLength)
-                throw new ArgumentException(
-                    $"Name must be between {CategoryConstants.MinNameLength} and {CategoryConstants.MaxNameLength} characters.",
-                    nameof(name));
-
-            if (string.IsNullOrWhiteSpace(description))
-                throw new ArgumentException("Description cannot be null or empty.", nameof(description));
-            if (description.Length < CategoryConstants.MinDescriptionLength || description.Length > CategoryConstants.MaxDescriptionLength)
-                throw new ArgumentException(
-                    $"Description must be between {CategoryConstants.MinDescriptionLength} and {CategoryConstants.MaxDescriptionLength} characters.",
-                    nameof(description));
+            EntityValidator.ValidateName(name);
+            EntityValidator.ValidateDescription(description);
 
             if (string.IsNullOrWhiteSpace(type))
                 throw new ArgumentException("Type cannot be null or empty.", nameof(type));

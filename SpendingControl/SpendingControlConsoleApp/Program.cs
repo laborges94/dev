@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using SpendingControlConsoleApp.Entities;
 
-var user = new User(1, "John Smith", "john@email.com", "", DateTime.Now.AddYears(-5));
+var user = new User(1, "John Smith", "john@email.com", "password123", DateTime.Now.AddYears(-5));
 var category = new Category(1, "Food", "Expenses with food and supermarket", "Expense", DateTime.Now.AddYears(-5));
 var expense = new Expense(1, 1, category.Id, 150.75, "Credit Card", DateTime.Now);
 var income = new Income(1, 1, 1, 3500.00, DateTime.Now);
