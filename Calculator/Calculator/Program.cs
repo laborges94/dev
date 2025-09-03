@@ -1,21 +1,104 @@
 ﻿Console.Clear();
-Console.WriteLine("First Number:");
-string? input1 = Console.ReadLine();
-if (string.IsNullOrWhiteSpace(input1))
-{
-	Console.WriteLine("Invalid input for first number.");
-	return;
-}
-float num1 = float.Parse(input1);
 
-Console.WriteLine("Second Number:");
-string? input2 = Console.ReadLine();
-if (string.IsNullOrWhiteSpace(input2))
-{
-	Console.WriteLine("Invalid input for second number.");
-	return;
-}
-float num2 = float.Parse(input2);
+Menu();
 
-float sum = num1 + num2;
-Console.WriteLine($"The sum of {num1} and {num2} is {sum}");
+static void Menu()
+{
+	Console.Clear();
+	Console.WriteLine("Select an operation:");
+	Console.WriteLine("1. Sum");
+	Console.WriteLine("2. Subtract");
+	Console.WriteLine("3. Multiply");
+	Console.WriteLine("4. Divide");
+	Console.WriteLine("5. Exit");
+	Console.WriteLine("--------------------");
+	Console.Write("Enter your choice: ");
+
+	short choice = short.Parse(Console.ReadLine()!);
+
+	switch (choice)
+	{
+		case 1:
+			Sum(FirstNumber(), SecondNumber());
+			break;
+		case 2:
+			Subtract(FirstNumber(), SecondNumber());
+			break;
+		case 3:
+			Multiply(FirstNumber(), SecondNumber());
+			break;
+		case 4:
+			Divide(FirstNumber(), SecondNumber());
+			break;
+		case 5:
+			Console.WriteLine("Exiting...");
+            Environment.Exit(0);
+			return;
+		default:
+			Console.WriteLine("Invalid choice.");
+			Console.ReadKey();
+			Menu();
+			break;
+	}
+}
+
+static float FirstNumber()
+{
+	Console.WriteLine("First Number:");
+	string? input = Console.ReadLine();
+	if (string.IsNullOrWhiteSpace(input))
+	{
+		Console.WriteLine("Invalid input for first number.");
+		return 0;
+	}
+	return float.Parse(input);
+}
+
+static float SecondNumber()
+{
+	Console.WriteLine("Second Number:");
+	string? input = Console.ReadLine();
+	if (string.IsNullOrWhiteSpace(input))
+	{
+		Console.WriteLine("Invalid input for second number.");
+		return 0;
+	}
+	return float.Parse(input);
+}
+
+static void Sum(float a, float b)
+{
+	float result = a + b;
+	Console.WriteLine($"The sum of {a} and {b} is {result}");
+	Console.ReadKey();
+	Menu();
+}
+
+static void Subtract(float a, float b)
+{
+	float result = a - b;
+	Console.WriteLine($"The difference of {a} and {b} is {result}");
+	Console.ReadKey();
+	Menu();
+}
+
+static void Multiply(float a, float b)
+{
+	float result = a * b;
+	Console.WriteLine($"The product of {a} and {b} is {result}");
+	Console.ReadKey();
+	Menu();
+}
+
+static void Divide(float a, float b)
+{
+	if (b == 0)
+	{
+		Console.WriteLine("Cannot divide by zero.");
+		return;
+	}
+	float result = a / b;
+	Console.WriteLine($"The quotient of {a} and {b} is {result}");
+	Console.ReadKey();
+	Menu();
+}
