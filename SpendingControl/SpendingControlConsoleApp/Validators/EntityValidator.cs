@@ -14,6 +14,11 @@ namespace SpendingControlConsoleApp.Validators
         {
             if (string.IsNullOrWhiteSpace(description))
                 throw new ArgumentException("Description cannot be null or empty.", nameof(description));
+            ValidateDescriptionLength(description);
+        }
+
+        public static void ValidateDescriptionLength(string description)
+        {
             if (description.Length < 5 || description.Length > 500)
                 throw new ArgumentException("Description must be between 5 and 500 characters.", nameof(description));
         }

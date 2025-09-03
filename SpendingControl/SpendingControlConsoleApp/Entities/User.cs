@@ -39,6 +39,6 @@ namespace SpendingControlConsoleApp.Entities
             EntityValidator.ValidatePassword(password);
 
             Password = password;
-        }
+        }        
     }    
 }

@@ -1,3 +1,5 @@
+using SpendingControlConsoleApp.Validators;
+
 namespace SpendingControlConsoleApp.Entities
 {
     public class Income
@@ -13,6 +15,9 @@ namespace SpendingControlConsoleApp.Entities
 
         public Income(int id, int userId, int categoryId, double amount, DateTime date, string? description = null)
         {
+            if (!string.IsNullOrWhiteSpace(description))
+                EntityValidator.ValidateDescriptionLength(description);
+
             if (amount <= 0)
                 throw new ArgumentException("Amount must be positive.", nameof(amount));
 
@@ -26,6 +31,9 @@ namespace SpendingControlConsoleApp.Entities
 
         public void UpdateIncome(int categoryId, double amount, string? description = null)
         {
+            if (!string.IsNullOrWhiteSpace(description))
+                EntityValidator.ValidateDescriptionLength(description);
+                
             if (amount <= 0)
                 throw new ArgumentException("Amount must be positive.", nameof(amount));
 
@@ -33,11 +41,5 @@ namespace SpendingControlConsoleApp.Entities
             Description = description;
             Amount = amount;
         }
-    }
-
-    public static class IncomeConstants
-    {
-        public const int MinDescriptionLength = 5;
-        public const int MaxDescriptionLength = 500;
-    }
+    }    
 }
