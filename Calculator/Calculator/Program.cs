@@ -10,7 +10,11 @@ static void Menu()
 	Console.WriteLine("2. Subtract");
 	Console.WriteLine("3. Multiply");
 	Console.WriteLine("4. Divide");
-	Console.WriteLine("5. Exit");
+	Console.WriteLine("5. Power");
+	Console.WriteLine("6. Root");
+	Console.WriteLine("7. Percentage");
+	Console.WriteLine("8. Arithmetic Mean");
+	Console.WriteLine("9. Exit");
 	Console.WriteLine("--------------------");
 	Console.Write("Enter your choice: ");
 
@@ -31,6 +35,18 @@ static void Menu()
 			Divide(FirstNumber(), SecondNumber());
 			break;
 		case 5:
+			Power(FirstNumber(), SecondNumber());
+			break;
+		case 6:
+			Root(FirstNumber(), SecondNumber());
+			break;
+		case 7:
+			Percentage(FirstNumber(), SecondNumber());
+			break;
+		case 8:
+			ArithmeticMean(FirstNumber(), SecondNumber());
+			break;
+		case 9:
 			Console.WriteLine("Exiting...");
             Environment.Exit(0);
 			return;
@@ -99,6 +115,43 @@ static void Divide(float a, float b)
 	}
 	float result = a / b;
 	Console.WriteLine($"The quotient of {a} and {b} is {result}");
+	Console.ReadKey();
+	Menu();
+}
+
+static void Power(float a, float b)
+{
+	float result = (float)Math.Pow(a, b);
+	Console.WriteLine($"{a} raised to the power of {b} is {result}");
+	Console.ReadKey();
+	Menu();
+}
+
+static void Root(float a, float b)
+{
+	if (b == 0)
+	{
+		Console.WriteLine("Cannot calculate root with degree zero.");
+		return;
+	}
+	float result = (float)Math.Pow(a, 1 / b);
+	Console.WriteLine($"The {b}-th root of {a} is {result}");
+	Console.ReadKey();
+	Menu();
+}
+
+static void Percentage(float a, float b)
+{
+	float result = (a / 100) * b;
+	Console.WriteLine($"{b}% of {a} is {result}");
+	Console.ReadKey();
+	Menu();
+}
+
+static void ArithmeticMean(float a, float b)
+{
+	float result = (a + b) / 2;
+	Console.WriteLine($"The arithmetic mean of {a} and {b} is {result}");
 	Console.ReadKey();
 	Menu();
 }
