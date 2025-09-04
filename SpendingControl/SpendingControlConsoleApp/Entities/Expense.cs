@@ -11,11 +11,13 @@ namespace SpendingControlConsoleApp.Entities
         public string? Description { get; private set; }
         public double Amount { get; private set; }
         public PaymentMethod PaymentMethod { get; private set; }
+        public PaymentCondition PaymentCondition { get; private set; }
+        public int Installments { get; private set; } = 1;
         public DateTime Date { get; private set; }
 
         protected Expense() { }
 
-        public Expense(int id, int userId, int categoryId, double amount, PaymentMethod paymentMethod, DateTime date, string? description = null, int? creditCardId = null)
+        public Expense(int id, int userId, int categoryId, double amount, PaymentMethod paymentMethod, PaymentCondition paymentCondition, DateTime date, string? description = null, int? creditCardId = null)
         {
             if (!string.IsNullOrWhiteSpace(description))
                 EntityValidator.ValidateDescriptionLength(description);
@@ -30,9 +32,10 @@ namespace SpendingControlConsoleApp.Entities
             Description = description;
             Amount = amount;
             PaymentMethod = paymentMethod;
+            PaymentCondition = paymentCondition;
             Date = date;
         }
-        public void UpdateExpense(int categoryId, double amount, PaymentMethod paymentMethod, string? description = null, int? creditCardId = null)
+        public void UpdateExpense(int categoryId, double amount, PaymentMethod paymentMethod, PaymentCondition paymentCondition, string? description = null, int? creditCardId = null)
         {
             if (!string.IsNullOrWhiteSpace(description))
                 EntityValidator.ValidateDescriptionLength(description);
@@ -44,9 +47,16 @@ namespace SpendingControlConsoleApp.Entities
             Description = description;
             Amount = amount;
             PaymentMethod = paymentMethod;
+            PaymentCondition = paymentCondition;
             CreditCardId = creditCardId;
         }
-    }    
+    }
+
+    public enum PaymentCondition
+    {
+        InCash,
+        Installments
+    }
     public enum PaymentMethod
     {
         Cash,
