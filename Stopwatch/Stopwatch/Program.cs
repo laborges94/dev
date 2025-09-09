@@ -35,7 +35,8 @@ static void PreStart(int time = 3)
     Console.Clear();
     Console.WriteLine("Go!");
     Thread.Sleep(1000);
-    Start(time);
+    //Start(time);
+    Regressive(time);
 }
 
 static void Start(int time = 10)
@@ -55,4 +56,21 @@ static void Start(int time = 10)
     Thread.Sleep(2500);
     Menu();
 }
+
+static void Regressive(int time)
+{
+    while (time > 0)
+    {
+        Console.Clear();
+        time--;
+        Console.WriteLine(time);
+        Thread.Sleep(1000);
+    }
+
+    Console.Clear();
+    Console.WriteLine("Stopwatch finished!");
+    Thread.Sleep(2500);
+    Menu();
+}
+
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
