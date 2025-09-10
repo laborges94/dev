@@ -5,16 +5,22 @@ Menu();
 static void Menu()
 {
 	Console.Clear();
-	Console.WriteLine("Select an operation:");
-	Console.WriteLine("1. Sum");
-	Console.WriteLine("2. Subtract");
-	Console.WriteLine("3. Multiply");
-	Console.WriteLine("4. Divide");
-	Console.WriteLine("5. Power");
-	Console.WriteLine("6. Root");
-	Console.WriteLine("7. Percentage");
-	Console.WriteLine("8. Arithmetic Mean");
-	Console.WriteLine("9. Exit");
+	Console.WriteLine("Select an option:");
+	Console.WriteLine("--------------------");
+	Console.WriteLine("1. Pocket Calculator");
+	Console.WriteLine("2. Solve Expression");
+	Console.WriteLine("--------------------");
+	Console.WriteLine("Quick Operations:");
+	Console.WriteLine("--------------------");
+	Console.WriteLine("3. Sum (List of numbers)");
+	Console.WriteLine("4. Subtract (A-B)");
+	Console.WriteLine("5. Multiply (List of numbers)");
+	Console.WriteLine("6. Divide (A/B where B cannot be 0)");
+	Console.WriteLine("7. Power (A^B)");
+	Console.WriteLine("8. Square Root (A^(1/2))");
+	Console.WriteLine("9. Percentage (A is the base, B is the percentage)");
+	Console.WriteLine("10. Arithmetic Mean ((A+B)/2)");
+	Console.WriteLine("0. Exit");
 	Console.WriteLine("--------------------");
 	Console.Write("Enter your choice: ");
 
@@ -23,32 +29,46 @@ static void Menu()
 	switch (choice)
 	{
 		case 1:
-			Sum(FirstNumber(), SecondNumber());
+			// Simple Calculator
+			Console.WriteLine("Simple Calculator selected.");
+			Console.WriteLine("This feature is under development.");
+			Console.ReadKey();
+			Menu();
 			break;
 		case 2:
-			Subtract(FirstNumber(), SecondNumber());
+			// Expression
+			Console.WriteLine("Expression selected.");
+			Console.WriteLine("This feature is under development.");
+			Console.ReadKey();
+			Menu();
 			break;
 		case 3:
-			Multiply(FirstNumber(), SecondNumber());
+			Sum(GetNumbers());
 			break;
 		case 4:
-			Divide(FirstNumber(), SecondNumber());
+			Subtract(FirstNumber(), SecondNumber());
 			break;
 		case 5:
-			Power(FirstNumber(), SecondNumber());
+			Multiply(FirstNumber(), SecondNumber());
 			break;
 		case 6:
-			Root(FirstNumber(), SecondNumber());
+			Divide(FirstNumber(), SecondNumber());
 			break;
 		case 7:
-			Percentage(FirstNumber(), SecondNumber());
+			Power(FirstNumber(), SecondNumber());
 			break;
 		case 8:
-			ArithmeticMean(FirstNumber(), SecondNumber());
+			Root(FirstNumber(), SecondNumber());
 			break;
 		case 9:
+			Percentage(FirstNumber(), SecondNumber());
+			break;
+		case 10:
+			ArithmeticMean(FirstNumber(), SecondNumber());
+			break;
+		case 0:
 			Console.WriteLine("Exiting...");
-            Environment.Exit(0);
+			Environment.Exit(0);
 			return;
 		default:
 			Console.WriteLine("Invalid choice.");
@@ -82,10 +102,41 @@ static float SecondNumber()
 	return float.Parse(input);
 }
 
-static void Sum(float a, float b)
+static IEnumerable<float> GetNumbers()
 {
-	float result = a + b;
-	Console.WriteLine($"The sum of {a} and {b} is {result}");
+	var numbers = new List<float>();
+
+	while (true)
+	{
+		Console.WriteLine("Enter a number (or type '=' to finish):");
+		string? input = Console.ReadLine();
+		if (string.IsNullOrWhiteSpace(input))
+		{
+			Console.WriteLine("Invalid input. Please enter a number or '='.");
+			continue;
+		}
+		if (input.Equals("=", StringComparison.CurrentCultureIgnoreCase))
+			break;
+
+		if (float.TryParse(input, out float number))
+			numbers.Add(number);
+		else
+			Console.WriteLine("Invalid number. Please try again.");
+	}
+
+	return numbers;
+}
+
+static void Sum(IEnumerable<float> numbers)
+{
+	float result = numbers.Sum();
+
+	Console.WriteLine($"The sum of:");
+	
+	foreach (var number in numbers)
+		Console.WriteLine($" - {number}");
+
+	Console.WriteLine($"is {result}");
 	Console.ReadKey();
 	Menu();
 }
@@ -142,7 +193,7 @@ static void Root(float a, float b)
 
 static void Percentage(float a, float b)
 {
-	float result = (a / 100) * b;
+	float result = a / 100 * b;
 	Console.WriteLine($"{b}% of {a} is {result}");
 	Console.ReadKey();
 	Menu();
