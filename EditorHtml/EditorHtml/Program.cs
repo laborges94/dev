@@ -1,1 +1,3 @@
-﻿
+﻿using EditorHtml;
+
+Menu.Show();
