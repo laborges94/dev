@@ -3,7 +3,7 @@ using SpendingControlConsoleApp.Entities;
 
 var user = new User(1, "John Smith", "john@email.com", "password123", DateTime.Now.AddYears(-5));
 var category = new Category(1, "Food", "Expenses with food and supermarket", CategoryType.Expense, DateTime.Now.AddYears(-5));
-var expense = new Expense(1, 1, category.Id, 150.75, PaymentMethod.CreditCard, PaymentCondition.InCash, DateTime.Now);
+var expense = new Expense(1, 1, category.Id, 150.75, PaymentMethod.CreditCard, PaymentCondition.InCash, 1, DateTime.Now);
 var income = new Income(1, 1, 1, 3500.00, DateTime.Now);
 var creditCard = new CreditCard(1, 1, "My Card", DateTime.Now.AddYears(2), "Visa", 5000.00, DateTime.Now.AddMonths(1), DateTime.Now);
 var financialGoal = new FinancialGoal(1, 1, "Trip", 10000.00, 2500.00, DateTime.Now.AddMonths(12), "International trip", DateTime.Now);
@@ -20,7 +20,7 @@ Console.WriteLine(
 user.UpdatePersonalInfo("Jane Doe", "jane@email.com");
 user.UpdatePassword("newpassword123");
 category.UpdateCategory("Supermarket", "All supermarket expenses", CategoryType.Expense);
-expense.UpdateExpense(category.Id, 50.25, PaymentMethod.DebitCard, PaymentCondition.InCash, "Grocery shopping");
+expense.UpdateExpense(category.Id, 50.25, PaymentMethod.DebitCard, 1, PaymentCondition.InCash, "Grocery shopping");
 income.UpdateIncome(category.Id, 500.00);
 creditCard.UpdateCreditCard("My New Card", DateTime.Now.AddYears(3), "Mastercard", 7000.00, DateTime.Now.AddMonths(2));
 financialGoal.UpdateFinancialGoal("Car", 30000.00, 5000.00, DateTime.Now.AddMonths(24), "Buy a new car");
