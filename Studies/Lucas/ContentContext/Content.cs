@@ -1,14 +1,8 @@
-namespace Lucas.ContentContext
-{
-    public abstract class Content
-    {
-        public Content()
-        {
-            Id = Guid.NewGuid();
-        }
+namespace Lucas.ContentContext;
 
-        public Guid Id { get; set; }
-        public string Title { get; set; } = string.Empty;
-        public string Url { get; set; } = string.Empty;
-    }
+public abstract class Content(string title, string url)
+{
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public string Title { get; set; } = title;
+    public string Url { get; set; } = url;
 }

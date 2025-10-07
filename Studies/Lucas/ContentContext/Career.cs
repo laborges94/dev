@@ -1,7 +1,7 @@
-namespace Lucas.ContentContext
+namespace Lucas.ContentContext;
+
+public class Career(string title, string url) : Content(title, url)
 {
-    public class Career : Content
-    {
-        public int Courses { get; set; }
-    }
+    public IList<CareerItem> Itens { get; set; } = [];
+    public int TotalCourses => Itens.Count;
 }

@@ -1,4 +1,3 @@
-namespace Lucas.ContentContext
-{
-    public class Article : Content;
-}
+namespace Lucas.ContentContext;
+
+public class Article(string title, string url) : Content(title, url);
