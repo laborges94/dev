@@ -1,10 +1,22 @@
+using Lucas.NotificationContext;
+
 namespace Lucas.ContentContext;
 
-public class CareerItem(int order, string title, string description, Course course)
+public class CareerItem : Base
 {
-    public int Order { get; set; } = order;
-    public string Title { get; set; } = title;
-    public string Description { get; set; } = description;
-    public Course Course { get; set; } = course
-        ?? throw new ArgumentNullException("Course cannot be null", nameof(course));
+    public CareerItem(int order, string title, string description, Course course)
+    {
+        Order = order;
+        Title = title;
+        Description = description;
+        Course = course;
+
+        if (course == null)
+            AddNotification(new Notification("Course", "Course is required"));
+    }
+
+    public int Order { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public Course Course { get; set; }
 }
