@@ -17,9 +17,9 @@ public abstract class Entity
     public bool IsActive { get; private set; } = true;
 
     // Constructors
-    protected BaseEntity() { }
+    protected Entity() { }
 
-    protected BaseEntity(int createdBy) => 
+    protected Entity(int createdBy) => 
         CreatedBy = createdBy;
 
     // Methods
